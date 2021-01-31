@@ -6,45 +6,16 @@
     <title>MiniChat</title>
 </head>
 <body class="container">
-<h1 class="mt-5">MiniChat</h1>
+<h1 class="mt-5">Access denied</h1>
 <hr/>
-<form id="form">
-    <div class="row">
-        <div class="col-8">
-            <input type="text" id="txtMessage" placeholder="Write a message" class="form-control">
-        </div>
-        <div class="col-4">
-            <button type="submit" class="btn btn-primary">
-                Send
-            </button>
-        </div>
-    </div>
-</form>
-
-<div class="row">
-    <div class="col">
-        <ul id="myMessages" class="mt-2"></ul>
-    </div>
-</div>
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.js" integrity="sha512-+l9L4lMTFNy3dEglQpprf7jQBhQsQ3/WvOnjaN/+/L4i0jOstgScV0q2TjfvRF4V+ZePMDuZYIQtg5T4MKr+MQ==" crossorigin="anonymous"></script>
 <script>
-  const socket = io('https://socketio--server.herokuapp.com/')
-  const form = document.querySelector('#form')
-  const messages = document.querySelector('#myMessages')
-  const txtMessage = document.querySelector('#txtMessage')
+  // Socket server connection
+  const socket = io('http://localhost:8080/')
 
-  form.addEventListener('submit', (evt) => {
-    evt.preventDefault()
-
-    const  newMessage = txtMessage.value
-
-    socket.emit('message-to-server', {text: newMessage})
-  })
-
-  socket.on('message-from-server', (data) => {
-    messages.innerHTML += `<li>${data.text}</li>`
+  socket.on('connect', (data) => {
+    console.log('connected')
   })
 
 </script>

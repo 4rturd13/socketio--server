@@ -3,6 +3,7 @@ const express = require('express')
 const http = require('http')
 const socketio = require('socket.io')
 const path = require('path')
+const cors = require('cors')
 
 const Sockets = require('./sockets')
 
@@ -19,8 +20,11 @@ class Server {
   }
 
   middlewares(){
-    //Show public directory
+    // Show public directory
     this.app.use(express.static(path.resolve(__dirname, '../public')))
+
+    // CORS
+    this.app.use(cors())
   }
 
   configureSockets(){
@@ -28,13 +32,13 @@ class Server {
   }
 
   execute(){
-    //Initialize middleware
+    // Initialize middleware
     this.middlewares()
 
-    //Initialize middleware
+    // Initialize middleware
     this.configureSockets()
 
-    //Initialize server
+    // Initialize server
     this.server.listen(this.port, () => {
       console.log('Server listen on port', this.port)
     })
